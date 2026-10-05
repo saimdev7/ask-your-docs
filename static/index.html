@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ask your document</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f6e6b'/%3E%3Ctext x='32' y='46' font-size='40' font-family='sans-serif' font-weight='700' text-anchor='middle' fill='white'%3EA%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -148,10 +149,10 @@
 
   function getSessionId() {
     let id = null;
-    try { id = localStorage.getItem("session_id"); } catch (e) {}
+    try { id = sessionStorage.getItem("session_id"); } catch (e) {}
     if (!id) {
       id = crypto.randomUUID();
-      try { localStorage.setItem("session_id", id); } catch (e) {}
+      try { sessionStorage.setItem("session_id", id); } catch (e) {}
     }
     return id;
   }
@@ -169,7 +170,7 @@
   }
 
   try {
-    const saved = localStorage.getItem("doc_name");
+    const saved = sessionStorage.getItem("doc_name");
     if (saved) setReady(saved);
   } catch (e) {}
 
@@ -192,12 +193,12 @@
       const res = await fetch("/upload", { method: "POST", body });
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || "Server returned " + res.status);
-      try { localStorage.setItem("doc_name", file.name); } catch (e) {}
+      try { sessionStorage.setItem("doc_name", file.name); } catch (e) {}
       setReady(file.name);
     } catch (err) {
       docStatus.className = "doc-status fail";
       docStatus.textContent = "Upload failed: " + err.message + ". Choose the PDF again.";
-      if (localStorage.getItem("doc_name")) input.disabled = false;
+      if (sessionStorage.getItem("doc_name")) input.disabled = false;
     } finally {
       uploadBtn.disabled = false;
       fileInput.value = "";

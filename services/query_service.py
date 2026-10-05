@@ -17,8 +17,9 @@ llm = ChatGroq(
 )
 
 prompt_template = ChatPromptTemplate.from_template(
-    """Answer the question using only the context below.
+      """Answer the question using only the context below.
 If the answer is not in the context, say "I don't know".
+Reply in plain text only. Do not use markdown, asterisks, hyphen bullets, or headings. Use short sentences or short paragraphs.
 
 Context:
 {context}
