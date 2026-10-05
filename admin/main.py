@@ -10,7 +10,6 @@ from services.query_service import stream_answer
 
 app = FastAPI()
 
-
 class ChatRequest(BaseModel):
     question: str
     session_id: str

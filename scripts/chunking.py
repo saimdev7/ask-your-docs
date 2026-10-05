@@ -3,7 +3,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from scripts.content_fetcher import load_pdf
 
 
-def split_docs(docs, chunk_size=200, chunk_overlap=50):
+def split_docs(docs, chunk_size=300, chunk_overlap=50):
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
