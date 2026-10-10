@@ -1,9 +1,7 @@
 import os
 import uuid
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
-from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from services.query_service import answer_query
 from scripts.ingestion import ingest_pdf
 from fastapi.responses import FileResponse, StreamingResponse
 from services.query_service import stream_answer

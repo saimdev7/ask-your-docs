@@ -53,7 +53,3 @@ def answer_query(question, session_id):
 def stream_answer(question, session_id):
     for token in build_chain(session_id).stream(question):
         yield token
-
-if __name__ == "__main__":
-    q = input("Question: ")
-    print("Answer:", answer_query(q, "test1"))
